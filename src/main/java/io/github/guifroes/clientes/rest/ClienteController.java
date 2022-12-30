@@ -42,7 +42,7 @@ public class ClienteController {
                 })
                 .orElseThrow( () -> new ResponseStatusException((HttpStatus.NOT_FOUND)));
     }
-    /*Teste*/
+
     @PutMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void atualizar(@PathVariable Integer id, @RequestBody Cliente clienteAtualizado) {
