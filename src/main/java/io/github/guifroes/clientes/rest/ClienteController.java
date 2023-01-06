@@ -2,6 +2,7 @@ package io.github.guifroes.clientes.rest;
 
 import io.github.guifroes.clientes.model.entity.Cliente;
 import io.github.guifroes.clientes.model.repository.ClienteRepository;
+import io.github.guifroes.clientes.model.repository.ServicoPrestadoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +16,9 @@ import java.util.List;
 public class ClienteController {
 
     private final ClienteRepository repository;
+
+    @Autowired
+    public ServicoPrestadoRepository servicoPrestadoRepository;
 
     @Autowired
     public ClienteController(ClienteRepository repository) {
@@ -45,6 +49,7 @@ public class ClienteController {
         repository
                 .findById(id)
                 .map(cliente -> {
+                    servicoPrestadoRepository.deleteAll();
                     repository.delete(cliente);
                     return Void.TYPE;
                 })
